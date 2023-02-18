@@ -1,0 +1,67 @@
+\chapter{Requirements}
+\label{chapter:intro}
+\section{System context}
+
+\section{Functional Requirements}
+\begin{tabular}{ |c|l|c|c| } 
+ \hline
+ Requirement ID & Requirement & MoSCoW \\ 
+ \hline
+ \hline
+ F1    & Every sensor in the system has to provide an validated value  & CH \\ 
+       & (within specifications listed in the datasheet of the sensor) to the sensorhub.  &  \\
+       &                                                                                  &  \\
+\hline
+ F1.1  & Validation of the sensors has to be done with a calibrated                       & CH \\
+       & reference or testing device.                                                     &   \\
+\hline
+ F2    & A Test suite has to be designed to validate sensor results.                      & CH \\
+ \hline
+ F2.1  & The Test suite has to have a plotting feature                                    & SH \\
+ \hline 
+ F2.2  & The Test suite has to support exporting harvested sensor data to an excel or csv file & SH \\
+ \hline
+ F3    & Data from the sensors has to be stored & MH\\
+       & to be used later for determining whether CPR was successful.  & \\
+\hline
+ F4    & The software design has to support the currently chosen and constructed & MH  \\
+       & sensor modules used in the Manikin & \\
+ \hline
+ F4.1  & The software design has to support the time of flight sensor & MH \\
+       & hardware chosen and constructed by previous groups. & \\
+\hline
+ F4.2  & The software design has to support the pressure sensor & MH \\
+       & hardware chosen and constructed by previous groups. & \\
+\hline
+ F4.3  & The software design has to support the differential pressure sensor & MH \\
+       & hardware chosen and constructed by previous groups. & \\
+\hline
+ F4.4  & The software design has to support the finger position sensor & MH \\
+       & hardware chosen and constructed by previous groups. & \\
+\hline
+ F5    & The data bus between the sensorhub and the mainbord has to use & SH\\
+       & a testable and extendable data protocol. &   \\
+ \hline
+ F5.1  & The data protocol has to be implemented using the i2c bus protocol. & MH \\
+ \hline
+ F6    & The software design has to implement a post (Power-On System Test) procedure. & WNH \\ 
+ \hline
+\end{tabular}
+
+\section{Non-Functional Requirements}
+\begin{tabular}{ |c|l|c|c| } 
+ \hline
+ Requirement ID & Requirement & MoSCoW \\ 
+ \hline
+ \hline
+ NF1    & The software design has to implement software engineering best practices.  & MH \\
+ \hline
+ NF2    & The software design has to use an consistent code style & MH \\
+ \hline 
+ NF3    & The software-, hardware-design and documentation are stored  & MH \\
+        & in public GitHub repository's & \\
+\hline
+ NF4   & Software unit tests have to be constructed to test the software & MH\\
+ \hline
+\end{tabular}
+\section{Design constraints}
