@@ -1,0 +1,74 @@
+\documentclass{layout/tudelft-report}
+
+\addbibresource{bibliography/references.bib}
+
+% Define Notation commands
+\input{notation}
+
+% Nomenclature
+\makenomenclature
+
+\begin{document}
+
+    \frontmatter
+
+    % Thesis Parameters
+    \title{Sensoren in een babyreanimatiepop}
+    \subtitle{Valideren en integreren van sensoren in een babyreanimatiepop}
+    \author{Richard Kroesen en Victor Hogeweij}
+    \subject{Project Report}
+
+    % Cover Page
+    \makecover
+    \afterpage{\blankpage}
+    
+    % Title Page
+    \input{frontmatter/title}
+    
+    % Copyright Page
+    \input{frontmatter/copyrightpage}
+
+    % Make a preface page
+    \input{frontmatter/preface.tex}
+    
+    % TOC, Nomenclature, List of stuff
+    \tableofcontents    
+    \printnomenclature
+    \listoffigures
+    \listoftables
+
+    %% Report
+    \mainmatter
+    \input{nomenclature}
+    \input{mainmatter/chapter-1-introduction}
+
+    % Parts can have epigraphs to add notes
+    \epigraphhead[650]{}
+  
+    
+    \input{mainmatter/chapter-3-literature-review.tex}
+    \input{mainmatter/chapter-4-preliminary-work.tex}
+
+    \epigraphhead[650]{}
+    \part{Additional Results}
+    \label{part:additional}
+    
+    \input{mainmatter/chapter-5-stuff.tex}
+    \input{mainmatter/chapter-6-verification-validation.tex}
+
+    \epigraphhead[650]{}
+    \part{Closure}
+    \label{part:closure}
+
+    \input{mainmatter/chapter-7-conclusion}
+    \input{mainmatter/chapter-8-recommendations}
+
+    % Bibliography with numeric style
+    \printbibliography[title=References]
+    \addcontentsline{toc}{chapter}{References}
+    
+    % __ Appendix ___
+    \appendix
+    \input{appendix/appendix-algorithms}
+    
+\end{document}
