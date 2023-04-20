@@ -1,5 +1,9 @@
-\chapter{Requirements}
-\label{chapter:intro}
+\chapter{Functional Design}
+\label{chapter:intro} 
+The functional design provides a detailed description of how the system will operate and how it adds value towards the current total system solution.
+\newline
+This chapter describes what the system's requirements and specifications. Future more system features, and finally also the system interactions are documented.
+
 \section{Functional Requirements}
 \begin{tabular}{ |c|l|c|c| } 
  \hline
@@ -13,7 +17,7 @@
  F1.1  & Validation of the sensors has to be done with a calibrated                       & CH \\
        & reference or testing device.                                                     &   \\
 \hline
- F2    & A Test suite has to be designed to validate sensor results.                      & CH \\
+ F2    & A Test suite has to be designed to validate and collect sensor results.          & CH \\
  \hline
  F2.1  & The Test suite has to have a plotting feature                                    & SH \\
  \hline 
@@ -62,4 +66,26 @@
  NF4   & Software unit tests have to be constructed to test the software & MH\\
  \hline
 \end{tabular}
-\section{Design constraints}
+\section{Design Constraints}
+There are a few design constraints related to this project.\\ 
+These constraints are either related to technical constraints or time related constraints. \\ This project is financed and backed by the school and most of the hardware is mostly handled by Johan and the IPS students, therefore there are no financial or organizational constraints.
+\subsection{Technical design constraints}
+There are multiple constraints in this category, due to the hardware and software decisions made by Johan and the previous project term groups. These constraints where easily pointed out and have helped with creating the functional requirements. To help analyse how much extra time a design constraint will take to tackle, a ranking system was added to the table.\\
+\begin{tabular}{|l|c|}
+\hline
+    Constraint & Rank \\
+               & (1 meaning low time effort, 10 meaning big effort) \\
+    \hline\hline
+     Previous groups have chosen the Arduino framework. & 5\\
+     But no research was done on the subject of \\frameworks for the samd series. Which probably means that \\ custom software implementations for hardware functions \\have to be made. Due to Arduino's limited support.\\ & \\
+     \hline
+     Due to the varying skillset of the upcoming project term groups. & 3\\
+     The code written has to be easy to understand. \\ Which might limit us in the use of tools or software frameworks.\\
+     \hline
+     
+     
+     
+     
+\end{tabular}
+
+\subsection{Time related constraints}

@@ -1,0 +1,228 @@
+\chapter{IntraNet}
+
+\section{Registers}
+This is the documentation for the IntraNet protocol. The IntraNet protocol is designed for the reliable communication between the hubs and the mainboard. \\\\
+All registers are 8 bits (Byte) to keep the protocol relative simple (KISS principle).
+
+\subsection{Status Registers}
+Register Tag: 0x00\\
+Register size: 8-bits\\
+Access: R\\
+
+\begin{tabular}{rp{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}}
+Bit &
+  7 &
+  6 &
+  5 &
+  4 &
+  3 &
+  2 &
+  1 &
+  0 \\ \cline{2-9} 
+
+\multicolumn{1}{r|}{x} &
+  \multicolumn{1}{c|}{x} &
+  \multicolumn{1}{c|}{x} & 
+  \multicolumn{1}{c|}{x} &
+  \multicolumn{1}{c|}{x} & 
+  \multicolumn{1}{c|}{x} & 
+  \multicolumn{1}{c|}{x} &
+  \multicolumn{1}{c|}{x} &
+  \multicolumn{1}{c|}{x} \\\cline{2-9} 
+  
+Access &
+  R &
+  R &
+  R &
+  R &
+  R &
+  R &
+  R &
+  R
+\end{tabular}
+
+\subsection{Control Registers}
+Register Tag: 0x00\\
+Register size: 8-bits\\
+Access: R\\
+
+\begin{tabular}{rp{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}}
+Bit &
+  7 &
+  6 &
+  5 &
+  4 &
+  3 &
+  2 &
+  1 &
+  0 \\ \cline{2-9} 
+
+\multicolumn{1}{r|}{x} &
+  \multicolumn{1}{c|}{x} &
+  \multicolumn{1}{c|}{x} & 
+  \multicolumn{1}{c|}{x} &
+  \multicolumn{1}{c|}{x} & 
+  \multicolumn{1}{c|}{x} & 
+  \multicolumn{1}{c|}{x} &
+  \multicolumn{1}{c|}{x} &
+  \multicolumn{1}{c|}{x} \\\cline{2-9} 
+  
+Access &
+  R &
+  R &
+  R &
+  R &
+  R &
+  R &
+  R &
+  R
+\end{tabular}
+
+
+\subsection{Configuration Registers}
+Register Tag: 0x00\\
+Register size: 8-bits\\
+Access: R\\
+
+\begin{tabular}{rp{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}}
+Bit &
+  7 &
+  6 &
+  5 &
+  4 &
+  3 &
+  2 &
+  1 &
+  0 \\ \cline{2-9} 
+
+\multicolumn{1}{r|}{x} &
+  \multicolumn{1}{c|}{x} &
+  \multicolumn{1}{c|}{x} & 
+  \multicolumn{1}{c|}{x} &
+  \multicolumn{1}{c|}{x} & 
+  \multicolumn{1}{c|}{x} & 
+  \multicolumn{1}{c|}{x} &
+  \multicolumn{1}{c|}{x} &
+  \multicolumn{1}{c|}{x} \\\cline{2-9} 
+  
+Access &
+  R &
+  R &
+  R &
+  R &
+  R &
+  R &
+  R &
+  R
+\end{tabular}
+
+\subsection{Data Registers}
+Register Tag: 0x00\\
+Register size: 8-bits\\
+Access: R\\
+
+\begin{tabular}{rp{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}}
+Bit &
+  7 &
+  6 &
+  5 &
+  4 &
+  3 &
+  2 &
+  1 &
+  0 \\ \cline{2-9} 
+
+\multicolumn{1}{r|}{x} &
+  \multicolumn{1}{c|}{x} &
+  \multicolumn{1}{c|}{x} & 
+  \multicolumn{1}{c|}{x} &
+  \multicolumn{1}{c|}{x} & 
+  \multicolumn{1}{c|}{x} & 
+  \multicolumn{1}{c|}{x} &
+  \multicolumn{1}{c|}{x} &
+  \multicolumn{1}{c|}{x} \\\cline{2-9} 
+  
+Access &
+  R &
+  R &
+  R &
+  R &
+  R &
+  R &
+  R &
+  R
+\end{tabular}
+
+\subsection{Command Registers}
+Register Tag: 0x00\\
+Register size: 8-bits\\
+Access: R\\
+
+\begin{tabular}{rp{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}}
+Bit &
+  7 &
+  6 &
+  5 &
+  4 &
+  3 &
+  2 &
+  1 &
+  0 \\ \cline{2-9} 
+
+\multicolumn{1}{r|}{x} &
+  \multicolumn{1}{c|}{x} &
+  \multicolumn{1}{c|}{x} & 
+  \multicolumn{1}{c|}{x} &
+  \multicolumn{1}{c|}{x} & 
+  \multicolumn{1}{c|}{x} & 
+  \multicolumn{1}{c|}{x} &
+  \multicolumn{1}{c|}{x} &
+  \multicolumn{1}{c|}{x} \\\cline{2-9} 
+  
+Access &
+  R &
+  R &
+  R &
+  R &
+  R &
+  R &
+  R &
+  R
+\end{tabular}
+
+\subsection{Error Registers}
+Register Tag: 0x00\\
+Register size: 8-bits\\
+Access: R\\
+
+\begin{tabular}{rp{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}}
+Bit &
+  7 &
+  6 &
+  5 &
+  4 &
+  3 &
+  2 &
+  1 &
+  0 \\ \cline{2-9} 
+
+\multicolumn{1}{r|}{x} &
+  \multicolumn{1}{c|}{x} &
+  \multicolumn{1}{c|}{x} & 
+  \multicolumn{1}{c|}{x} &
+  \multicolumn{1}{c|}{x} & 
+  \multicolumn{1}{c|}{x} & 
+  \multicolumn{1}{c|}{x} &
+  \multicolumn{1}{c|}{x} &
+  \multicolumn{1}{c|}{x} \\\cline{2-9} 
+  
+Access &
+  R &
+  R &
+  R &
+  R &
+  R &
+  R &
+  R &
+  R
+\end{tabular}
