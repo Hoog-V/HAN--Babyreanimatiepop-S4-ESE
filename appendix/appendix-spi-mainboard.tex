@@ -1,10 +1,8 @@
 \chapter{SPI Mainboard}
 \section{Introduction}
 For the internal communication bus on the mainboard is a well described datacommunication protocol needed. This document will provide the information needed to implement the datacommunication protocol used on the mainboard in software/hardware.
-
 \section{Underlying interfacemethod}
-The underlying datacommunication protocol will be SPI. SPI is chosen because of the high data throughput and flexibility this interface method provides. However big flexibility has also down sides. One of those is the high amount of documentation and testing needed to implement our own communicationprotocol on top of spi. \\
-\pagebreak
+The underlying datacommunication protocol will be SPI. SPI is chosen because of the high data throughput and flexibility this interface method provides. However big flexibility has also down sides. One of those is the high amount of documentation and testing needed to implement our own communicationprotocol on top of spi. 
 \section{Protocol specification}
 SPI itself leaves a lot to be filled in by the protocol on top. This offers great flexibility, however it also takes a lot of work and documentation to get it consistent. This section is dedicated to give general specifications of the data protocol used.
 \subsection{Word/character size}
@@ -196,7 +194,6 @@ Access &
    0x0 & Backbone port disabled\\ \hline
    0x1 & Backbone port initialized succesfully \\ \hline
 \end{tabular}\\\\
-\pagebreak\\
 \textbf{Bit 28 - BBDOK} Backbone port D status\\\\
 \begin{tabular}{|c|l|}
     \hline
@@ -211,6 +208,7 @@ Access &
    0x0 & Bluetooth disabled\\ \hline
    0x1 & Bluetooth initialized succesfully and active\\ \hline
 \end{tabular}\\\\
+\pagebreak\\
 \textbf{Bit 24 - I2COK} I2C status\\\\
 \begin{tabular}{|c|l|}
     \hline
@@ -393,7 +391,6 @@ This bit field defines the slave address of the to the backbone port connected s
 This bit field defines the sample time of port A of the slave device connected to Backbone x.\\\\
 \textbf{Bits 23:20 - PBSAMPLETIME[4:0]} Backbone slave port sample time or time base, 1-32 Ms\\
 This bit field defines the sample time of port B of the slave device connected to Backbone x.\\\\
-
 \textbf{Bits 15:14 - BBTYPE[1:0]} Backbone slave device type\\
 This bit field defines the slave device type connected to the backbone port.\\\\
 \begin{tabular}{|c|l|l|}
@@ -532,7 +529,6 @@ This bitfield will be read-only when the backbone slave device is a SensorHub ot
 \textbf{Bits 8:0 - BxREQWORDSPB[7:0]} Backbone x Slave Port B REQWORDS\\
 This bitfield is the amount of bytes that gets out of the sensor on Port B or needs to be provided to an actuator on Port B. \\
 This bitfield will be read-only when the backbone slave device is a SensorHub otherwise it will be read/write.
-\pagebreak
 \subsection{Register SENSDATA}
 regaddr: 0x30\\
 Register size: n-bits (depends on sensor) can be read from REQWORDS reg\\

@@ -1,0 +1,31 @@
+\chapter{USB service protocol}
+\section{Introduction}
+For the communication bus over the usb service port on the mainboard, sensorhubs and actuatorhub is a well described datacommunication protocol needed. This chapter will provide the information needed to implement the datacommunication protocol used over the usb service port in software/hardware.
+\section{Underlying interfacemethod}
+The underlying datacommunication interface will be UART over USB (VCOM). UART was chosen because of ease of use. This protocol is widely supported on multiple platforms and easy to setup within the framework used on the mainboard/hubs.
+\section{Protocol specification}
+UART itself leaves a lot to be filled in by the protocol on top. This offers great flexibility, however it also takes a lot of work and documentation to get it consistent. This section is dedicated to give general specifications of the data protocol used.
+
+\section{Timing diagram}
+
+\def\degr{${}^\circ$}
+\begin{tikztimingtable}
+  Clock 128\,MHz 0\degr    & H 2C N(A1) 8{2C} N(A5) 3{2C} G\\
+  Clock 128\,MHz 90\degr   & [C] 2{2C} N(A2) 8{2C} N(A6) 2{2C} C\\
+  Clock 128\,MHz 180\degr  & C 2{2C} N(A3) 8{2C} N(A7) 2{2C} G\\
+  Clock 128\,MHz 270\degr  & 3{2C} N(A4) 8{2C} N(A8) 2C C\\
+  Coarse Pulse             & 3L 16H 6L \\
+  Coarse Pulse - Delayed 1 & 4L N(B2) 16H N(B6) 5L \\
+  Coarse Pulse - Delayed 2 & 5L N(B3) 16H N(B7) 4L \\
+  Coarse Pulse - Delayed 3 & 6L 16H 3L \\
+  \\
+  Final Pulse Set          & 3L 16H N(B5) 6L \\
+  Final Pulse $\overline{\mbox{Reset}}$ & 6L N(B4) 16H 3L \\
+  Final Pulse              & 3L N(B1) 19H N(B8) 3L \\
+\extracode
+  \tablerules
+  \begin{pgfonlayer}{background}
+    \foreach \n in {1,...,8}
+      \draw [help lines] (A\n) -- (B\n);
+  \end{pgfonlayer}
+\end{tikztimingtable}
