@@ -1,11 +1,19 @@
 \chapter{IntraNet}
+With sensors and actuators connected to each hub, the IntraNet Protocol provides the mainboard to efficiently operate with devices and aggregate the data of interest. The IntraNet protocol creates a centralized communication solution.
+
+\section{Data Messages Frame}
+The data frame is relative straight-forward. For writing the slave expects to get a address of the register and the new value for it. \\
+% \includegraphics[scale=0.45]{figures/inp_i2c_dataframe.png}
+For reading a register the slave only expects the register address and gives a response with the current register value after a request. \\
+The slave returns the register value. Some registers are bigger than the default 8 bits, but they are always multiples of bytes. 
+The master stops when the slave sends a stopcondition 
 
 \section{Registers}
-This is the documentation for the IntraNet protocol. The IntraNet protocol is designed for the reliable communication between the hubs and the mainboard. \\\\
-All registers are 8 bits (Byte) to keep the protocol relative simple (KISS principle).
+This section documents the registers of the IntraNet protocol. The IntraNet protocol is designed for the reliable communication between the hubs and the mainboard. \\\\
+Registers are in 8 bits or multiples of them, due to i2c default word size of a byte.
 
 \subsection{Status Registers}
-Register Tag: 0x00\\
+Register ref: 0x00\\
 Register size: 8-bits\\
 Access: R\\
 
@@ -20,13 +28,13 @@ Bit &
   1 &
   0 \\ \cline{2-9} 
 
-\multicolumn{1}{r|}{x} &
-  \multicolumn{1}{c|}{x} &
-  \multicolumn{1}{c|}{x} & 
-  \multicolumn{1}{c|}{x} &
-  \multicolumn{1}{c|}{x} & 
-  \multicolumn{1}{c|}{x} & 
-  \multicolumn{1}{c|}{x} &
+\multicolumn{1}{r|}{} &
+  \multicolumn{1}{c|}{\scriptsize{PAOK}} &
+  \multicolumn{1}{c|}{\scriptsize{PBOK}} & 
+  \multicolumn{1}{c|}{\scriptsize{SA1OK}} &
+  \multicolumn{1}{c|}{\scriptsize{SA2OK}} & 
+  \multicolumn{1}{c|}{\scriptsize{SB1OK}} & 
+  \multicolumn{1}{c|}{\scriptsize{SB2OK}} &
   \multicolumn{1}{c|}{x} &
   \multicolumn{1}{c|}{x} \\\cline{2-9} 
   
@@ -40,12 +48,55 @@ Access &
   R &
   R
 \end{tabular}
+\vspace{0.5cm} \\ 
+\textbf{Bit 7 - PAOK} Backbone port A status\\\\
+\begin{tabular}{|c|l|}
+    \hline
+   PAOK & Description\\ \hline
+   0x0 & Backbone port disabled\\ \hline
+   0x1 & Backbone port initialized successfully \\ \hline
+\end{tabular}\\\\
+\textbf{Bit 6 - PBOK} Backbone port B status\\\\
+\begin{tabular}{|c|l|}
+    \hline
+   PBOK & Description\\ \hline
+   0x0 & Backbone port disabled\\ \hline
+   0x1 & Backbone port initialized successfully \\ \hline
+\end{tabular}\\\\
+\textbf{Bit 5 - SA1OK} Sensor port A1 status\\\\
+\begin{tabular}{|c|l|}
+    \hline
+   SA1OK & Description\\ \hline
+   0x0 & Sensor port disabled\\ \hline
+   0x1 & Sensor port initialized successfully \\ \hline
+\end{tabular}\\\\
+\textbf{Bit 4 - SA2OK} Sensor port A2 status\\\\
+\begin{tabular}{|c|l|}
+    \hline
+   SA2OK & Description\\ \hline
+   0x0 & Sensor port disabled\\ \hline
+   0x1 & Sensor port initialized successfully \\ \hline
+\end{tabular}\\\\
+\textbf{Bit 3 - SB1OK} Sensor port B1 status\\\\
+\begin{tabular}{|c|l|}
+    \hline
+   SB1OK & Description\\ \hline
+   0x0 & Sensor port disabled\\ \hline
+   0x1 & Sensor port initialized successfully \\ \hline
+\end{tabular}\\\\
+\textbf{Bit 2 - SB2OK} Sensor port B2 status\\\\
+\begin{tabular}{|c|l|}
+    \hline
+   SB2OK & Description\\ \hline
+   0x0 & Sensor port disabled\\ \hline
+   0x1 & Sensor port initialized successfully \\ \hline
+\end{tabular}\\\\
+Other bits are reserved.
 
 \subsection{Control Registers}
-Register Tag: 0x00\\
+Register ref: 0x01\\
 Register size: 8-bits\\
-Access: R\\
-
+Access: R/W\\
 \begin{tabular}{rp{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}}
 Bit &
   7 &
@@ -57,7 +108,7 @@ Bit &
   1 &
   0 \\ \cline{2-9} 
 
-\multicolumn{1}{r|}{x} &
+\multicolumn{1}{r|}{} &
   \multicolumn{1}{c|}{x} &
   \multicolumn{1}{c|}{x} & 
   \multicolumn{1}{c|}{x} &
@@ -77,13 +128,24 @@ Access &
   R &
   R
 \end{tabular}
-
 
 \subsection{Configuration Registers}
-Register Tag: 0x00\\
+Configuration registers create the map between the port and the sensortype. So that the master knows which sensor is on the port.\\\\
+\textbf{Set sensor on port XN (SSP[X][N]):}\\
+Register ref: 0x02 to 0x06\\
 Register size: 8-bits\\
-Access: R\\
-
+Access: R/W
+\\\\
+\textbf{Sensor type list} Sesnor identification\\\\
+\begin{tabular}{|c|l|}
+    \hline
+   ID & sensor name\\ \hline
+   0x0 & Default, no sensor\\ \hline
+   0x1 & Compression sensor\\ \hline
+   0x2 & Differential pressure sensor\\ \hline
+   0x3 & Finger position sensor\\ \hline
+\end{tabular}
+\vspace{0.5cm} \\
 \begin{tabular}{rp{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}}
 Bit &
   7 &
@@ -114,10 +176,10 @@ Access &
   R &
   R &
   R
-\end{tabular}
+\end{tabular}\\\\
 
 \subsection{Data Registers}
-Register Tag: 0x00\\
+Register ref: 0x00\\
 Register size: 8-bits\\
 Access: R\\
 
@@ -154,9 +216,10 @@ Access &
 \end{tabular}
 
 \subsection{Command Registers}
-Register Tag: 0x00\\
+The command registers are used to send commands, like get last sample. \\
+Register ref: 0x00\\
 Register size: 8-bits\\
-Access: R\\
+Access: R/W\\
 
 \begin{tabular}{rp{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}p{1.25cm}}
 Bit &
@@ -191,7 +254,7 @@ Access &
 \end{tabular}
 
 \subsection{Error Registers}
-Register Tag: 0x00\\
+Register ref: 0x00\\
 Register size: 8-bits\\
 Access: R\\
 
@@ -226,3 +289,24 @@ Access &
   R &
   R
 \end{tabular}
+
+\section{Addressing Map}
+In the communication protocol, the master device needs to specify the target address with which it intends to interact. The addressing map defines the available address names and their corresponding IDs. Here is the addressing map: \\\\
+\begin{tabular}{|c|c|}
+    \hline
+    \textbf{Address Name} & ID \\
+    \hline
+    kNoAddr & 0 \\
+    \hline
+    kSensorHubOne & 1 \\
+    \hline
+    kSensorHubTwo & 2 \\
+    \hline
+    kSensorHubThree & 3 \\
+    \hline
+    kBreathingModule & 4 \\
+    \hline
+    kActuatorHub & 5 \\
+    \hline
+\end{tabular}
+

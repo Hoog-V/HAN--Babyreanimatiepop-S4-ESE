@@ -2,6 +2,7 @@
 
 \addbibresource{bibliography/references.bib}
 \usepackage{tikz-timing}[2009/05/15]
+\usepackage{longtable}
 % Define Notation commands
 \input{notation}
 
@@ -14,13 +15,12 @@
 
     % Thesis Parameters
     \title{Sensors and Communication Systems of the manikin}
-    \subtitle{Validation and Integration of embedded systems}
+    \subtitle{Firmware Validation and Integration.}
     \author{Richard Kroesen en Victor Hogeweij}
     \subject{Project Report}
 
     % Cover Page
     \makecover
-    \afterpage{\blankpage}
     
     % Title Page
     \input{frontmatter/title}
@@ -28,6 +28,8 @@
     % Copyright Page
     \input{frontmatter/copyrightpage}
 
+    \input{frontmatter/Summary}
+    
     % Make a preface page
     \input{frontmatter/preface.tex}
     
@@ -40,20 +42,17 @@
     %% Report
     \mainmatter
     \input{nomenclature}
+
     \input{mainmatter/chapter-1-introduction}
 
     % Parts can have epigraphs to add notes
     \epigraphhead[650]{}
     \input{mainmatter/chapter-2-requirements.tex}
-    
     \input{mainmatter/chapter-3-architecture.tex}
     \input{mainmatter/chapter-4-preliminary-work.tex}
 
     \epigraphhead[650]{}
-    \part{Realisation and Testing}
-    \label{part:additional}
-    
-    \input{mainmatter/chapter-5-stuff.tex}
+    \input{mainmatter/chapter-5-software-design.tex}
     \input{mainmatter/chapter-6-verification-validation.tex}
 
     \epigraphhead[650]{}
@@ -69,8 +68,10 @@
     
     % __ Appendix ___
     \appendix
-    \input{appendix/appendix-algorithms}
+    \part{Appendix}
+    \input{appendix/appendix-entry_induction_guide}
     \input{appendix/appendix-intranet}
     \input{appendix/appendix-spi-mainboard}
     \input{appendix/appendix-USB-service-protocol}
+    \input{appendix/appendix-log-script-guide}
 \end{document}

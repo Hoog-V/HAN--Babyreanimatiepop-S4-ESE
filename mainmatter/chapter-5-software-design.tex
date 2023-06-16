@@ -1,0 +1,57 @@
+\chapter{Deliverables Description}
+This chapter gives an overview of the Manikin firmware. The objective is to inform and explain how and what the current version (release 1.0.0) of the firmware does.
+\section{Firmware Functionality Highlights}
+The current release version 1.0.0 is able to do this:
+\begin{itemize}
+  \item Exception handling using the Serial console.
+  \item Saving and reading the unique device identifier from the onboard external flash memory (can be done using usb serial console, SETID and STATUS command)
+  \item Set the sensortype for each sensorport from the usb serial console using the SETPORT command.
+  \item Reading sensor value's using the STREAM command from the usb serial console.
+  \item Set the sample rate in milliseconds from the usb serial console (using SETSR command).
+  \item Get the module status and identifier using the STATUS command in the usb serial console.
+  \item Build to easily expand the current commandset and adding more methods to the usb serial service console.
+  \item HELP command for showing manual usage in serial console.
+  \item Is able to use the compression, ventilation and finger position sensor using the sensor libraries from Manikin Software Libraries.
+  \item Has functionality for running unit tests.
+  \item Has custom board configuration files for the sensorhub module.
+  \item Modular software solution to enable easy integration of other sensors.
+\end{itemize}
+
+\section{Software Libraries}
+
+\subsection{GPIO}
+The GPIO library is a minimal library written to drive the GPIO peripheral of the SAMD51 and SAMD21. The functions do not depend on third-party libraries and uses the internal peripheral registers of the SAMDxx microcontroller.\\\\
+The following functionality is supported by this library: \\
+- Setting pin states \\
+- Toggling pin states \\
+- Setting pin input/output states \\
+- Linking pin functions to pins using the internal pinmux \\
+- Setting pin sink/drive current \\
+- Setting pin input sampling mode (continuous/on-demand) \\
+
+\subsection{I2C Master}
+The I2C Master is an I2C wrapper which wraps Arduino Wire library to a simplified universal interface. This way all the dependent sensor libraries can easily be ported to another platform, by simply replacing the I2C wrapper with a new wrapper using the platform/oem specific functions.
+\subsection{USB service protocol}
+The USB service protocol is a library written to emulate a command-line like interface over the VCOM port of the SAMD21/SAMD51. The library uses the Arduino Serial library and FreeRTOS as its foundation. The Arduino Serial library is used to communicate over the VCOM port and FreeRTOS provides easy task-switching. \\
+When using the library, a background task is created to  listen for new incoming characters on the VCOM port. When an enter is detected a linear search is performed using strcmp to check if the command is found within the service protocol command and callback struct array.
+\subsection{SPI Slave}
+
+\subsection{Sensors}
+
+\subsection{Logger}
+\subsubsection{Flash Logger}
+
+\subsubsection{Serial Logger}
+
+\subsection{Exception}
+
+
+
+
+
+
+\section{Additional Documentation}
+The technical and most up-to-date documentation could be found on the GitHub organization page. 
+
+\section{Data File Script Save}
+For the purpose of logging data from the stream, a Python script is employed. This versatile script effectively converts the JSON terminal stream into a format that is more suitable for analysis and further processing.

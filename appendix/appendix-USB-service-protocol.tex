@@ -1,31 +1,41 @@
 \chapter{USB service protocol}
+\label{appendix::usb_service_protocol}
 \section{Introduction}
 For the communication bus over the usb service port on the mainboard, sensorhubs and actuatorhub is a well described datacommunication protocol needed. This chapter will provide the information needed to implement the datacommunication protocol used over the usb service port in software/hardware.
 \section{Underlying interfacemethod}
 The underlying datacommunication interface will be UART over USB (VCOM). UART was chosen because of ease of use. This protocol is widely supported on multiple platforms and easy to setup within the framework used on the mainboard/hubs.
 \section{Protocol specification}
-UART itself leaves a lot to be filled in by the protocol on top. This offers great flexibility, however it also takes a lot of work and documentation to get it consistent. This section is dedicated to give general specifications of the data protocol used.
+The protocol used will be a custom commandline type of interface. The format of commands and arguments will be very similar to the linux/unix commandline but with custom commands. This section will be dedicated to describing the general specifications and usage of this protocol.
+\subsection{Connection settings}
+The settings for the UART connection are:\\
+Baud: 115200\\
+Parity: none \\
+Databits: 8\\
+Stopbits: 1\\
+Data will be send and transmitted in ascii characters. This might induce overhead depending on the situation.
+\subsection{Usage}
+The usage of this protocol is like a linux commandline. This means that the syntax is:\\\\
+\texttt{[COMMAND] [ARG1] [ARG2] ... [ARGn]}\\\\
+Each command has its own set of possible arguments. For example the SETPORT command will have the syntax:\\\\
+\texttt{SETPORT [DEVTYPE\_PORTA] [DEVTYPE\_PORTB]} ...\\\\
+When setting the sensortype on port a to the fingerposition sensor: 0x12 and the sensortype on port b to the time of flight sensor: 0x10, the command will be:\\\\
+\texttt{SETPORT 18 16}\\\\
+The whitespaces in between arguments and the command are really important for proper execution of the command.
+\subsection{Commands}
+The commandset will vary depending on the device type plugged in to the USB port. Meaning a sensorhub has different commands than a mainboard. However it will have a basic commandset which is universally deployed among the sensorhub, actuatorhub and mainboard.
 
-\section{Timing diagram}
+\subsubsection{Basic command set}
+\begin{longtable} {|m{5em}|m{15em}|m{12.2em}|m{14em}|}
+\hline
+    Command  & Function & Command syntax & Response format \\
+   \hline
+   STATUS & Will return status parameters like: The devicetype, samplecount, sample space left,  Connected sensors/devices & \texttt{STATUS} \newline No extra arguments needed. & !E:\texttt{ [ERROR message]} on error \newline or JSON\{ \} on successful \newline command execution\\          \hline
+  SETPORT & Will set device types on the \newline communication ports of the device. See sentypes table \ref{chapter::SPI Mainboard} & \texttt{SETPORT [DEVTYPE\_PORTn]} An argument is needed for every usable port on device& !E:\texttt{ [ERROR code]} on error \newline !OK on successful \newline command execution \\ \hline
+  SETID   & This will set the DEVICE ID for the device connected.. & \texttt{SETID [ARG]} \newline ARG is 8-bit device id & !E:\texttt{ [ERROR code]} on error \newline !OK on successful \newline command execution\\ \hline
+  STREAM & This will read and stream sensor \newline value's (of the currently connected sensors) to the console in JSON format & \texttt{STREAM} \newline No extra arguments needed. & !E:\texttt{ [ERROR message]} on error \newline or JSON\{ \} on successful \newline command execution\\ \hline
+  SETSR & This will set the sample rate on the \newline (sensor) communication ports of the device in milliseconds. & \texttt{SETSR [SENSOR\_PORTn]} \newline An argument is needed for every usable sensor port on device. \newline The argument can be \newline a number from 10-1000 & !E:\texttt{ [ERROR code]} on error \newline OK on successful \newline command execution \\ \hline
+  HELP & This will show the supported command set with necessary arguments & \texttt{HELP} \newline No extra arguments needed. & !E:\texttt{ [ERROR code]} on error \newline Formatted help message on \newline successful command execution \\ \hline
+  \caption{Basic command set}
+  \label{tab:BasicCommandSet}
+\end{longtable}
 
-\def\degr{${}^\circ$}
-\begin{tikztimingtable}
-  Clock 128\,MHz 0\degr    & H 2C N(A1) 8{2C} N(A5) 3{2C} G\\
-  Clock 128\,MHz 90\degr   & [C] 2{2C} N(A2) 8{2C} N(A6) 2{2C} C\\
-  Clock 128\,MHz 180\degr  & C 2{2C} N(A3) 8{2C} N(A7) 2{2C} G\\
-  Clock 128\,MHz 270\degr  & 3{2C} N(A4) 8{2C} N(A8) 2C C\\
-  Coarse Pulse             & 3L 16H 6L \\
-  Coarse Pulse - Delayed 1 & 4L N(B2) 16H N(B6) 5L \\
-  Coarse Pulse - Delayed 2 & 5L N(B3) 16H N(B7) 4L \\
-  Coarse Pulse - Delayed 3 & 6L 16H 3L \\
-  \\
-  Final Pulse Set          & 3L 16H N(B5) 6L \\
-  Final Pulse $\overline{\mbox{Reset}}$ & 6L N(B4) 16H 3L \\
-  Final Pulse              & 3L N(B1) 19H N(B8) 3L \\
-\extracode
-  \tablerules
-  \begin{pgfonlayer}{background}
-    \foreach \n in {1,...,8}
-      \draw [help lines] (A\n) -- (B\n);
-  \end{pgfonlayer}
-\end{tikztimingtable}

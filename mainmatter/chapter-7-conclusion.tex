@@ -1,14 +1,64 @@
 \chapter{State-of-Art}
 \label{chapter:conc}
 Where did the development of the embedded systems landed? What is realised, and finished etc. 
-\section{Closing Remarks}
-\label{section:conc-closing-remarks}
-
-\section{Research Questions}
-\label{section:conc-research-questions}
-
-The research questions posed in \cref{chapter:intro} are repeated below for convenience.
-
-\RestateResearchQuestion{1}{What state-of-the-art methods are most suitable for XXX?}
-
-Reflect on research questions.
+\section{Project Results}
+This section lists the modules or parts that are realised. \\
+In general this is the contribution or positive change that this project had:\\
+\begin{itemize}
+    \item Modular firmware with proper development organizational version control.
+    \item Version controlled development environment with code standards.
+    \item Crucial data acquisition software modules tested.
+\end{itemize}
+Note: The "(RESULT)" indicates whether the result was not a must have in the requirement list.
+\begin{table}[hb!]
+\begin{tabular}{ |c|l|c|c| } 
+ \hline
+ Requirement ID & Requirement & Achieved \\ 
+ \hline
+ \hline
+ F1    & Every sensor in the system has to provide an validated value  & (YES) \\ 
+       & (within specifications listed in the datasheet of the sensor) to the sensorhub.  &  \\
+       &                                                                                  &  \\
+\hline
+ F1.1  & Validation of the sensors has to be done with a calibrated                       & (NO) \\
+       & reference or testing device.                                                     &   \\
+\hline
+ F2    & A Test suite has to be designed to validate and collect sensor results.          & (YES) \\
+ \hline
+ F2.1  & The Test suite has to have a plotting feature                                    & (NO) \\
+ \hline 
+ F2.2  & The Test suite has to support exporting harvested sensor data to an excel or csv file & YES \\
+ \hline
+ F3    & Data from the sensors has to be stored & YES\\
+       & to be used later for determining whether CPR was successful.  & \\
+\hline
+ F4    & The software design has to support the currently chosen and constructed & YES  \\
+       & sensor modules used in the Manikin & \\
+ \hline
+ F4.1  & The software design has to support the time of flight sensor & YES \\
+       & hardware chosen and constructed by previous groups. & \\
+\hline
+ F4.2  & The software design has to support the pressure sensor & YES \\
+       & hardware chosen and constructed by previous groups. & \\
+\hline
+ F4.3  & The software design has to support the differential pressure sensor & YES \\
+       & hardware chosen and constructed by previous groups. & \\
+\hline
+ F4.4  & The software design has to support the finger position sensor & YES \\
+       & hardware chosen and constructed by previous groups. & \\
+\hline
+ F5    & The data bus between the sensorhub and the mainbord has to use & (NO)\\
+       & a testable and extendable data protocol. &   \\
+ \hline
+ F5.1  & The data protocol has to be implemented using the i2c bus protocol. & (NO) \\
+ \hline
+ F6    & The software design has to implement a post (Power-On System Test) procedure. & (NO) \\ 
+ \hline
+\end{tabular}
+ \caption{Project requirements results}
+ \label{tab:functional_requirements}
+\end{table}
+This project has achieved the must-haves and some extra goals of the requirements. 
+% \section{System Specification}
+% Technical parameters specifications of the hub. \\
+% Draft of relevant parameters: sampling time (max), buffer size/max samples, memory(ram) usages current, performance?, other limitation factors/absolutes, electrical overview (why not), interfaces overview with corresponding purpose, USB service baud, pcb dimensions, etc

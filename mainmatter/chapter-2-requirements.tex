@@ -1,10 +1,11 @@
 \chapter{Functional Design}
-\label{chapter:intro} 
+\label{chapter:requirements} 
 The functional design provides a detailed description of how the system will operate and how it adds value towards the current total system solution.
 \newline
 This chapter describes what the system's requirements and specifications. Future more system features, and finally also the system interactions are documented.
 
 \section{Functional Requirements}
+\begin{table}[hb!]
 \begin{tabular}{ |c|l|c|c| } 
  \hline
  Requirement ID & Requirement & MoSCoW \\ 
@@ -49,8 +50,11 @@ This chapter describes what the system's requirements and specifications. Future
  F6    & The software design has to implement a post (Power-On System Test) procedure. & WNH \\ 
  \hline
 \end{tabular}
-
+ \caption{Project functional requirements}
+ \label{tab:functional_requirements}
+\end{table}
 \section{Non-Functional Requirements}
+\begin{table}[!hb]
 \begin{tabular}{ |c|l|c|c| } 
  \hline
  Requirement ID & Requirement & MoSCoW \\ 
@@ -58,7 +62,7 @@ This chapter describes what the system's requirements and specifications. Future
  \hline
  NF1    & The software design has to implement software engineering best practices.  & MH \\
  \hline
- NF2    & The software design has to use an consistent code style & MH \\
+ NF2    & The software design has to use a consistent code style & MH \\
  \hline 
  NF3    & The software-, hardware-design and documentation are stored  & MH \\
         & in public GitHub repository's & \\
@@ -66,11 +70,15 @@ This chapter describes what the system's requirements and specifications. Future
  NF4   & Software unit tests have to be constructed to test the software & MH\\
  \hline
 \end{tabular}
+ \caption{Project non-functional requirements}
+ \label{tab:non_functional_requirements}
+\end{table}
 \section{Design Constraints}
 There are a few design constraints related to this project.\\ 
 These constraints are either related to technical constraints or time related constraints. \\ This project is financed and backed by the school and most of the hardware is mostly handled by Johan and the IPS students, therefore there are no financial or organizational constraints.
 \subsection{Technical design constraints}
-There are multiple constraints in this category, due to the hardware and software decisions made by Johan and the previous project term groups. These constraints where easily pointed out and have helped with creating the functional requirements. To help analyse how much extra time a design constraint will take to tackle, a ranking system was added to the table.\\
+There are multiple constraints in this category, due to the hardware and software decisions made by Johan and the previous project term groups. These constraints where easily pointed out and have helped with creating the functional requirements. To help analyse how much extra time a design constraint will take to tackle, a ranking system was added to the table.\\\\
+\begin{table}[!hb]
 \begin{tabular}{|l|c|}
 \hline
     Constraint & Weight \\
@@ -82,10 +90,7 @@ There are multiple constraints in this category, due to the hardware and softwar
      Due to the varying skillset of the upcoming project term groups. & 3\\
      The code written has to be easy to understand. \\ Which might limit us in the use of tools or software frameworks.\\
      \hline
-     
-     
-     
-     
 \end{tabular}
-
-\subsection{Time related constraints}
+ \caption{Project design constraints}
+ \label{tab:functional_requirements}
+\end{table}

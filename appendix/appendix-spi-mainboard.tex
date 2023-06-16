@@ -1,4 +1,5 @@
 \chapter{SPI Mainboard}
+\label{appendix::SPI_SLAVE_PROTOCOL}
 \section{Introduction}
 For the internal communication bus on the mainboard is a well described datacommunication protocol needed. This document will provide the information needed to implement the datacommunication protocol used on the mainboard in software/hardware.
 \section{Underlying interfacemethod}
@@ -9,7 +10,7 @@ SPI itself leaves a lot to be filled in by the protocol on top. This offers grea
 The SPI specification doesn't specify the amount of bits used in a word/character; Therefore it could be any amount of bits. However we don't live in that perfect world and the hardware used to implement the protocol on has set hard limits on the amount of bits the protocol uses.
 There are two options: 8-bits or 9-bits. \textbf{For this protocol 8-bits will be used, as it is the most commonly chosen amount of bits. }
 \subsection{Clock speed}
-The SPI specification also leaves this option open and there is also no commonly chosen speed. Therefore we chose the clock speed of 1 MHz. This (clock) frequency can also be changed later because the hardware and software is flexible enough to accept an change of clock speed.
+The SPI specification also leaves this option open and there is also no commonly chosen speed. Therefore we chose the clock speed of 1 MHz. This (clock) frequency can also be changed later because the hardware and software is flexible enough to accept a change of clock speed.
 \subsection{Transaction}
 The SPI data interface doesn't have a standard transaction format and leaves this completely up to the protocol used. For example SPI transaction can in some devices be used in conjuction with physical extra pins describing if the transaction is a write or read operation. This is commonly used in the interface for display drivers and gives the interface a higher throughput.
 \\
@@ -42,8 +43,8 @@ If the transaction was a write transaction from master to slave. Then the slave 
 
 \pagebreak
 \subsubsection{Timing diagram}
-When put together a timing diagram would look like this:\\
-\includegraphics[scale=0.28]{figures/mainboard_communication_timing_diagram.png}
+This is a timing diagram of the communication between Slave and Master within a read and write operation:\\
+\includegraphics[scale=0.06]{figures/mainboard_communication_timing_diagram.jpg}
 \pagebreak
 \section{Registers}
 This section will list all the registers of the mainboard.
