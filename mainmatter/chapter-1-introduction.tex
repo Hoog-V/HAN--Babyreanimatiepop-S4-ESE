@@ -5,26 +5,25 @@
 Each year cardiac arrests account for more than thirty percent of mortality worldwide. Since
 early cardiopulmonary resuscitation (CPR) is an important factor in survival of a cardiac arrest,
 it would be beneficial for a large population to have up-to-date CPR skills. This project tries to
-improve quality of CPR training by proposing a system for automated real-time feedback.
+improve the quality of CPR training by proposing a system for automated real-time feedback.
 Existing systems for CPR training all have their limits in providing desired feedback to a large
-group of CPR learners and that is why a novel modular and open patient simulation system was
-developed. \cite{jakortenmsc}\\\\
-Due to the modular characteristic of this open patient simulation system, the system can be used from baby to grown up CPR training. 
+group of CPR learners and that is why a novel modular and open patient simulation system is started. \cite{jakortenmsc}\\\\
+Due to the modular characteristic of this open patient simulation system, the system can be expanded to other forms of CPR training, like advanced life support training. 
 For this project the goal is to implement this modular system in a baby CPR doll (also referred to as a manikin).\\
 \section{Previous work}
-The project in this document is an expansion from the previous project groups. Previous project groups have made a large contribution to conceptualization, prototyping and realising subsystems. \\
-Previous groups have made all the hardware designs, architecture modeling of subsystems and programming of them for the manikin.\\ 
+Previous project groups have made a large contribution to conceptualization, prototyping and realising subsystems. \\
+Previous groups worked on the pcb hardware designs, architecture modeling of subsystems and programming of modules for the manikin.\\ 
+The previous student groups which worked on this project have made quite some progress in reading the compression, flow and finger position sensors embedded in the manikin.
+\\However the code for reading the sensors are still separate programs which need to be integrated in to one big program. Besides this problem, we have to solve the varying code quality of those programs and also verify the output of these programs in a practical and scientific manner.\\\\
 \section{Objective for this term project}
 Next phase of the development is the integration of all the subsystems into one system.\\ 
 The challenge during this project is to integrate, test and make it modular for the future. \\ \\ 
-The previous student groups which worked on this project have made quite some progress in reading the compression, flow and finger position sensors embedded in the manikin.
-\\However the code for reading the sensors are still separate programs which need to be integrated in to one big program. Besides this problem, we have to solve the varying code quality of those programs and also verify the output of these programs in a practical and scientific manner.\\\\
 \textbf{The objectives of this project are:}\\
 a). Create a maintainable and modular firmware version control environment. \\ 
 a). Refactoring of current firmware to comply with standardized code styling and good practises.\\
 b). Integration of modules into subsystems which are part of functional systems.\\
 c). Properly test and validate all the software and make use of hybrid tests (using simulators, test benches and software unit-tests).\\
-d). Create a good basis for an educational development environment.\\
+d). Create a good foundation for an open education and innovation platform.\\
 
 \section {Project Analysis}
-The project started with a need for testing and validating the sensors of the project client. Quickly, it was concluded that there should also be a modular software environment solution.
+The project started with a need for testing and validating the sensors of the project client. Quickly, it was concluded that there should also be a modular software environment solution.\\ The conclusion was that in the current state of the project, the most valuable contribution was to organize, integrate, improve and validate the current created implementations into one stable firmware solution. 

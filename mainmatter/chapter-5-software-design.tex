@@ -1,5 +1,5 @@
 \chapter{Deliverables Description}
-This chapter gives an overview of the Manikin firmware. The objective is to inform and explain how and what the current version (release 1.0.0) of the firmware does.
+This chapter gives an overview of the released Manikin firmware. The objective is to inform and explain how and what the current version (release 1.0.0) of the firmware does.
 \section{Firmware Functionality Highlights}
 The current release version 1.0.0 is able to do this:
 \begin{itemize}
@@ -20,7 +20,7 @@ The current release version 1.0.0 is able to do this:
 \section{Software Libraries}
 
 \subsection{GPIO}
-The GPIO library is a minimal library written to drive the GPIO peripheral of the SAMD51 and SAMD21. The functions do not depend on third-party libraries and uses the internal peripheral registers of the SAMDxx microcontroller.\\\\
+The GPIO library is a low-level library written to drive the GPIO peripheral of the SAMD51 and SAMD21. The functions do not depend on third-party libraries and uses the internal peripheral registers of the SAMDxx microcontroller.\\\\
 The following functionality is supported by this library: \\
 - Setting pin states \\
 - Toggling pin states \\
@@ -29,29 +29,28 @@ The following functionality is supported by this library: \\
 - Setting pin sink/drive current \\
 - Setting pin input sampling mode (continuous/on-demand) \\
 
-\subsection{I2C Master}
-The I2C Master is an I2C wrapper which wraps Arduino Wire library to a simplified universal interface. This way all the dependent sensor libraries can easily be ported to another platform, by simply replacing the I2C wrapper with a new wrapper using the platform/oem specific functions.
+\subsection{I2C}
+The I2C library is an I2C wrapper which wraps Arduino Wire library to a simplified universal interface. This way all the dependent sensor libraries can easily be ported to another platform, by simply replacing the I2C wrapper with a new wrapper using the platform/oem specific functions.
 \subsection{USB service protocol}
 The USB service protocol is a library written to emulate a command-line like interface over the VCOM port of the SAMD21/SAMD51. The library uses the Arduino Serial library and FreeRTOS as its foundation. The Arduino Serial library is used to communicate over the VCOM port and FreeRTOS provides easy task-switching. \\
-When using the library, a background task is created to  listen for new incoming characters on the VCOM port. When an enter is detected a linear search is performed using strcmp to check if the command is found within the service protocol command and callback struct array.
+When using the library, a background task is created to listen for new incoming characters on the VCOM port. When an enter is detected a linear search is performed using strcmp to check if the command is found within the service protocol command and callback struct array.
 \subsection{SPI Slave}
-
+The SPI Slave library implements the SPI slave protocol described in appendix \ref{appendix::SPI_SLAVE_PROTOCOL}. \\\\
+The API consists of an initialize function and a global array containing the registers. 
 \subsection{Sensors}
-
+The sensors library consists of small sensor libraries with an universal interface. The sensors library uses the I2C wrapper for the I2C communication and has support for the following sensors:\\
+- CompressionSensor (VL6180)\\
+- VentilationSensor (SDP810)\\
+- FingerpositionSensor (ADS7138) \\
 \subsection{Logger}
+The logger library provides an universal API for logging data to a plethora of mediums. At this moment two mediums are supported, but these can be expanded in the future.
 \subsubsection{Flash Logger}
-
+This is a logger which can write data to external flash memory using the Adafruit\_SPIFlash Library.
 \subsubsection{Serial Logger}
-
+This is a logger which can write data to the serial console using the Arduino Serial library.
 \subsection{Exception}
-
-
-
-
-
-
+This library provides a minimal implementation of throw and assert. This library uses macro's to determine the line number of the assert or throw and allows to set custom log messages. The library can be used with the aforementioned logger library to log the data to a specified medium.
 \section{Additional Documentation}
 The technical and most up-to-date documentation could be found on the GitHub organization page. 
-
 \section{Data File Script Save}
 For the purpose of logging data from the stream, a Python script is employed. This versatile script effectively converts the JSON terminal stream into a format that is more suitable for analysis and further processing.

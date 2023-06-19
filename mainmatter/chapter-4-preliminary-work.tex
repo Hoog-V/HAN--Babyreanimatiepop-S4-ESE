@@ -1,8 +1,8 @@
 \chapter{Technical Design}
-This chapter translates the functional and the architecture into the real-world engineering implementation. 
+This chapter translates the functional and the architecture into technical implementation. The realisation engineering details are documented here. 
 
 \section{Protocols Highlights}
-For the details of the protocols, please consult the appendix. This section only covers the basics for understanding. and awareness of existence.  \\
+For the details of the protocols, please consult the appendix. This section only covers the basics for understanding and to create awareness of existence.  \\
 \subsection{SPI Slave protocol}
 This protocol is used for the communication on the internal communicationbus of the mainboard (between the Raspberry Pi and the SAMD51).\\
 \subsubsection{SPI interface}
@@ -17,7 +17,7 @@ The data transfer on the SPI bus occurs in a full-duplex manner, meaning that da
 
 \subsubsection{Slave protocol}
 The SPI standard only defines the data transfer between devices but not the protocol on top. This has to be created by the manufacturer of the slave device. Therefore for this project, a slave protocol had to be built which can be implemented on the SPI interface.\\\\
-The details of this protocol can be read in appendix \ref{appendix::SPI_SLAVE_PROTOCOL}. The chosen design was made with data integrity in mind. That means that both written and read bytes on the databus are validated with a maxim-CRC8 algorithm. If the integrity check fails, data can be requested using the sequence number. \\\\
+The details of this protocol can be read in appendix \ref{appendix::SPI_SLAVE_PROTOCOL}. The chosen design was made with data integrity in mind. This means that both written and read bytes on the databus are validated with a maxim-CRC8 algorithm. If the integrity check fails, data can be requested using the sequence number. \\\\
 The slave protocol designed looks a lot like the I2C slave protocol used between the sensor/power/actuator- hubs and the mainboard. This was by design and makes the implementation of the protocols a bit easier as the software could now be written in a more generic manner. \\
 \pagebreak
 \subsubsection{Features}
@@ -27,7 +27,7 @@ This protocol can be used to set and get: the sensor types, sampling rates of th
 This protocol is used for the communication from the hubs to an external computer over (VCOM) USB.\\ This can be used in conjunction with other mentioned dataprotocols and adds another communication functionality to the hubs.\\
 
 \subsubsection{VCOM interface}
-This protocol uses the VCOM data interface, which is a virtual COM port over USB. The VCOM port can then be used like a real UART connection. Providing a lot of flexibility since we have dont have to worry about the hardware side of UART. To read more about the UART connection settings for the VCOM port read appendix \ref{appendix::usb_service_protocol}.
+This protocol uses the VCOM data interface, which is a virtual COM port over USB. The VCOM port can then be used like a real UART connection. Providing a lot of flexibility since we dont have to worry about the hardware side of UART. To read more about the UART connection settings for the VCOM port read appendix \ref{appendix::usb_service_protocol}.
 
 \subsubsection{Service protocol}
 To make things easier and to emulate a serial console the messages send over UART for the protocol is in plain ascii and represent abbreviated English words as commands. The usage of the service protocol is similar to the usage of a linux/unix commandline. Status and sensor readings are send in json format over the console. The left over commands return confirmations in plain text with \texttt{!ERR} for errors and \texttt{!OK}. For the full usage and explaination, take a look at appendix \ref{appendix::usb_service_protocol}.
@@ -37,9 +37,9 @@ The features of this protocol are very similar to the SPI slave protocol. This p
 
 
 \section{Engineering Decisions}
-The Engineering Decisions section is meant to document crucial choices which have consequences or limitations for the future of the project life cycle. \\ 
+The Engineering Decisions section is meant to document crucial implementation choices which could have consequences or limitations for the future development. \\ 
 This section serves as a comprehensive record of the key decisions made by the development team, providing valuable insights into the reasoning, considerations, and trade-offs that influenced the chosen path.\\\\
-Lastly this is also the section for reference to make iterations, enhancements and/or maintenance easier.
+Lastly this is also the section for reference when an iteration, enhancements or maintenance is required or needed.
 \subsection{Software Framework}
 The framework used on the hubs and the mainboard use the Arduino framework. The software delivered by the previous groups was based on the Arduino framework and was non-functional. Which meant it needed a rewrite. We have considered using another framework like zephyr or Microchip ASF. \\To test these frameworks we have constructed the following requirements:\\
 FrameworkSpec-1[MH] The framework has to be easy to learn/use for the beginning programmer. \\
@@ -87,13 +87,13 @@ The Arduino framework refers to the software and libraries that enable programmi
 \pagebreak
 \subsubsection{Conclusion}
 To help with choosing the right framework for this project we used a table with each column representing a requirement.\\
-We still stuck to arduino due to the low skill needed to understand and write programs based on the arduino framework. The disadvantage of limited low-level control can be mitigated by creating low-level libraries for certain hardware peripherals. The memory limitations and hardware dependencies can be solved by having enough RAM/FLASH space and by minimizing software dependencies on arduino in the software design.
+We still stuck to arduino due to the easy-entry skill needed to understand and write programs based on the arduino framework. The disadvantage of limited low-level control can be mitigated by creating low-level libraries for certain hardware peripherals. The memory limitations and hardware dependencies can be solved by having enough RAM/FLASH space and by minimizing software dependencies on arduino in the software design.
 
 \begin{center}
 \footnotesize
 \begin{longtable}{|m{10em}|m{10em}|m{10em}|m{10em}|m{10em}|}
     \hline
-    Framework & easy to use/learn & easily reconfigurable & reliable & supports all hardware \\ \hline
+    Framework & Dev Adaptability & Configuration & Reliability & Hardware Support \\ \hline
     Zephyr & Steep learning curve, uses non-standard way of initializing and utilizing hardware peripherals & Yes and no, When the platform is supported and all drivers used are available to the platform then yes it is easy to reconfigure. If not the case the answer is no & Yes, when used correctly it functions very reliably, gives compiler warnings when used incorrectly & No, most of the hardware functions are supported. Additional hardware drivers have to be written manually \\ \hline
     ASF & Moderate learning curve, needs knowledge of the hardware to use. & No, due to the easy to use API it is very tightly coupled, doing a lot of things under the hood which differ for each platform & No, when making mistakes this framework doesn't give any warnings and it lets the user easily misconfigure peripherals & Yes, it is written by the manufacturer of the mcu series used in this project, and supports all the hardware functions of the SAMD21/51\\ \hline
     Arduino & Beginner friendly & It is written to be cross platform and uses wrappers under the hood to provide the same functionality for each platform. & Yes, when using first-party libraries the arduino framework can be reliable. & No, it doesn't support all peripherals of the SAMD, because Arduino is written to be as generic as possible and only support features which are on the Arduino boards \\ \hline
@@ -102,7 +102,7 @@ We still stuck to arduino due to the low skill needed to understand and write pr
 \subsection{Style guide}
 Requirement NF2 in chapter \ref{chapter:requirements} states that a consistent code style needs to be applied to current and new code. After a thorough look through the currently available code styles and decided to use the Google Style guide. We chose this one since it isn't too limiting for usage on embedded systems. It does still allow the usage of old c-style functions instead of the standard lib which is very resource intensive for embedded systems. And it would mix well with our testing framework which also utilizes the Google Style guide.
 \subsection{Version control system}
-Requirement NF3 in chapter \ref{chapter::requirements} states that the code, hardware and documentation needs to be stored in public GitHub repository's. Our project client made a GitHub Organization and gave permission to create repository's. \\\\
+Requirement NF3 in chapter \ref{chapter:requirements} states that the code, hardware and documentation needs to be stored in public GitHub repository's. Our project client made a GitHub Organization and gave permission to create repository's. \\\\
 We created the following repository's:\\
 - Manikin Software -> To store (firmware) code in for each manikin component and complementary tools (like data harvesting scripts) (SensorHub, ActuatorHub, PowerHub, scripts) \\
 - Manikin Hardware -> To store all the hardware designs made by our client and previous project groups. \\

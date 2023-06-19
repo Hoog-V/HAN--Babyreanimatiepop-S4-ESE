@@ -1,6 +1,6 @@
 \chapter{Firmware Verification and Validation}
 \label{chapter:vv}
-This chapter is specially for documentation of testing and verifying the quality of the developed firmware. 
+This chapter contains the documentation of testing and verifying the quality of the released firmware. 
 \section{Testing Methodology}
 This section describes how the firmware testing is setup and executed. 
 \subsection{Testing Strategy}
@@ -13,8 +13,8 @@ The firmware is tested based on the following testing strategies and methods:
  \item \textbf{Mock Testing}: Due to strong dependency with hardware modules, like I2C mocks were needed to simulate(mock) the signals or functionality of the real objects.
 \end{itemize}
 \subsection{Test Environment}
-The testing environment is setup and configured in VS code. The testing framework is Google Testing library, which is used for software test suites (combination of test cases) and mocks for hardware interfaces.\\\\
-Testing of sensor functionality (not validation of the reading result, outside of the project scope) is done by connection with the hub and analyzing the stream data. 
+The testing environment is setup and configured in VS code IDE. The testing framework is Google Testing library, which is used for software test suites (combination of test cases) and mocks for hardware interfaces.\\\\
+Testing of the sensor functionality (not validation of the reading result, outside of the project scope) is done by connection with the hub and analyzing the stream data. 
 \subsection{Test Coverage Goal}
 The most essential system components are tested. Essential components are the data aggregation transducers, because the main function of the system is to gather the data reliably.
 \section{Code Examples}
